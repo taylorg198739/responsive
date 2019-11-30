@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Candler NC Weather Station" />
+	<meta name="keywords" content="candler,asheville,north carolina,weather" />
+	<meta name="author" content="Joe Jaworski" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<title>Candler, NC Weather Report</title>
+	
+	<script src="Chart.min.js"></script>
+
+</head>
+
+<body>
+<div id="wrap">
+	<div id="header">
+  		<h1>candler weather</h1>
+		<p><strong>candler, north carolina 28715</strong></p>
+	</div>
+
+	<div id="leftside">
+		<h2 class="hide">menu</h2>
+		<ul class="avmenu">
+			<li><a href="index.html">Home</a></li>
+			<li><a class="current" href="temp.html">Temperature</a></li>
+			<li><a href="rain.html">Rain</a></li>
+			<li><a href="wind.html">Wind</a></li>
+			<li><a href="history.html">History</a></li>
+			<li><a href="about.html">About</a></li>
+		</ul>
+	</div>
+
+  <div id="contentwide">
+		<h2><img src="img/thermo.gif" width="13" height="26" alt="" class = "alignleft" />temperature</h2>
+		
+
+	<div id="chartdiv">&nbsp;
+			<canvas id="temp12-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+   
+		<script>
+
+		// Last 12hr Temp Values **********
+		var Hours = [
+		'6PM',
+		'7PM',
+		'8PM',
+		'9PM',
+		'10PM',
+		'11PM',
+		'12AM',
+		'1AM',
+		'2AM',
+		'3AM',
+		'4AM',
+		'5AM',
+		'6AM',
+		'7AM',
+		'8AM',
+		'9AM',
+		'10AM',
+		'11AM',
+		'12PM',
+		'1PM',
+		'2PM',
+		'3PM',
+		'4PM',
+		'5PM' ];
+		var Values = [
+		51,
+		47,
+		45,
+		45,
+		43,
+		43,
+		43,
+		43,
+		44,
+		45,
+		45,
+		46,
+		46,
+		46,
+		46,
+		49,
+		51,
+		53,
+		65,
+		70,
+		70,
+		70,
+		68,
+		64 ];
+
+		// Calculate min/max Y axis
+		var Tmin = 0;
+		var Tmax = 100;
+		new Chart(document.getElementById("temp12-chart"),
+		{
+			type: 'bar',
+			data: {
+				labels: [Hours[0], Hours[1], Hours[2], Hours[3], Hours[4], Hours[5], Hours[6], Hours[7], Hours[8], Hours[9], Hours[10], Hours[11], Hours[12],Hours[13],Hours[14],Hours[15],Hours[16],Hours[17],Hours[18],Hours[19],Hours[20],Hours[21],Hours[22],Hours[23] ],
+				datasets: [
+				{
+					label: "Temp",
+
+					backgroundColor: '#54ECEA',
+
+					data: [Values[0], Values[1], Values[2], Values[3], Values[4], Values[5], Values[6], Values[7], Values[8], Values[9], Values[10], Values[11], Values[12], Values[13], Values[14], Values[15], Values[16], Values[17], Values[18], Values[19], Values[20], Values[21], Values[22], Values[23] ]
+				}
+			]
+    },
+    options:
+	{
+		legend: { display: false },
+		title:
+		{
+			display: true,
+			text: 'Temperature - Last 24 Hours'
+		},
+		responsive: false,
+		maintainAspectRatio: false,
+		scales:
+		{
+            yAxes: [{
+            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 5 },
+            scaleLabel: { display: true, labelString: 'Temperatue (F)' }
+				
+         }]}
+        
+
+    }
+
+});
+
+    </script></div>
+
+
+<div id="chartdiv2">&nbsp;
+			<canvas id="hilotemp-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+   
+		<script>
+
+		// Last 10 Days, Hi/Lo **********
+		var Dates = [
+		'11/17',
+		'11/18',
+		'11/19',
+		'11/20',
+		'11/21',
+		'11/22',
+		'11/23',
+		'11/24',
+		'11/25',
+		'11/26' ];
+		var Highs = [
+        '62',
+        '60',
+        '54',
+        '54',
+        '64',
+        '66',
+        '52',
+        '47',
+        '58',
+        '57' ];
+        
+		var Lows = [
+        '30',
+        '34',
+        '34',
+        '32',
+        '30',
+        '37',
+        '46',
+        '28',
+        '28',
+        '28' ];
+
+		// Calculate min/max Y axis
+		var Tmin = 0;
+		var Tmax = Highs[0];
+		for(i = 1; i < Lows.length; i++)
+		{
+			if (Highs[i] > Tmax)
+				Tmax = Highs[i];
+		}
+		Tmax = (Math.floor(Tmax/10) * 10) + 10;
+
+		new Chart(document.getElementById("hilotemp-chart"),
+		{
+			type: 'bar',
+			data: {
+				labels: [Dates[0], Dates[1], Dates[2], Dates[3], Dates[4], Dates[5], Dates[6], Dates[7], Dates[8], Dates[9] ],
+				datasets: [
+				{
+     				label: "High",
+					backgroundColor: '#F0807F',
+
+					data: [Highs[0], Highs[1], Highs[2], Highs[3], Highs[4], Highs[5], Highs[6], Values[7], Highs[8], Highs[9] ]
+				},
+				{
+					label: "Low",
+                    backgroundColor: '#67FF67',
+
+					data: [Lows[0], Lows[1], Lows[2], Lows[3], Lows[4], Lows[5], Lows[6], Lows[7], Lows[8], Lows[9] ]
+				},
+				
+			]
+    },
+    options:
+	{
+		legend: { display: true },
+		title:
+		{
+			display: true,
+			text: 'Hight/Low Temperatures- Last 10 days'
+		},
+		responsive: false,
+		maintainAspectRatio: false,
+		scales:
+		{
+            yAxes: [{
+            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 10 },
+            scaleLabel: { display: true, labelString: 'Temperatue (F)' }
+				
+         }]}
+        
+
+    }
+
+});
+
+
+
+    </script></div>
+
+
+<div id="chartdiv3">&nbsp;
+			<canvas id="extremes-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+   
+		<script>
+
+		// Extremes, Last 12 months **********
+		var Months = [
+		'NOV',
+		'DEC',
+		'JAN',
+		'FEB',
+		'MAR',
+		'APR',
+		'MAY',
+		'JUN',
+		'JUL',
+		'AUG',
+		'SEP',
+		'OCT' ];
+		var Highs = [
+        '69',
+        '72',
+        '64',
+        '78',
+        '73',
+        '84',
+        '89',
+        '89',
+        '88',
+        '90',
+        '90',
+        '90' ];
+        
+		var Lows = [
+        '19',
+        '16',
+        '12',
+        '21',
+        '19',
+        '26',
+        '39',
+        '45',
+        '50',
+        '49',
+        '49',
+        '30' ];
+
+		// Calculate min/max Y axis
+		var Tmin = 0;
+		var Tmax = Highs[0];
+		for(i = 1; i < Lows.length; i++)
+		{
+			if (Highs[i] > Tmax)
+				Tmax = Highs[i];
+		}
+		Tmax = (Math.floor(Tmax/10) * 10) + 10;
+
+//		window.alert(Tmin);
+//		window.alert(Tmax);
+
+		new Chart(document.getElementById("extremes-chart"),
+		{
+			type: 'bar',
+			data: {
+				labels: [Months[0], Months[1], Months[2], Months[3], Months[4], Months[5], Months[6], Months[7], Months[8], Months[9], Months[10], Months[11] ],
+				datasets: [
+				{
+     				label: "High",
+					backgroundColor: '#FF6969',
+
+					data: [Highs[0], Highs[1], Highs[2], Highs[3], Highs[4], Highs[5], Highs[6], Values[7], Highs[8], Highs[9], Highs[10], Highs[11] ]
+				},
+				{
+					label: "Low",
+                    backgroundColor: '#6994FF',
+
+					data: [Lows[0], Lows[1], Lows[2], Lows[3], Lows[4], Lows[5], Lows[6], Lows[7], Lows[8], Lows[9], Lows[10], Lows[11] ]
+				},
+				
+			]
+    },
+    options:
+	{
+		legend: { display: true },
+		title:
+		{
+			display: true,
+			text: 'Temperature Extremes- Last 12 months'
+		},
+		responsive: false,
+		maintainAspectRatio: false,
+		scales:
+		{
+            yAxes: [{
+            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 10 },
+            scaleLabel: { display: true, labelString: 'Temperatue (F)' }
+				
+         }]}
+        
+
+    }
+
+});
+
+
+
+    </script>
+
+	
+	</div>
+	<p>&nbsp;</p>
+
+
+	<div id="footer">
+		<p><span>&copy; 2013-2019 Joe Jaworski<br />
+		all rights reserved&nbsp;&nbsp;&brvbar;&nbsp;&nbsp;<a href="njs.html" onmouseover="this.href='mail' + 'to:' + 'jj' + String.fromCharCode(64) + 'joejaworski' + '.' + 'com'">Email</a></span></p>
+	</div>
+
+</div></div>
+</body>
+</html>

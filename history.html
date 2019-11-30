@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Candler NC Weather Station" />
+	<meta name="keywords" content="candler,asheville,north carolina,weather" />
+	<meta name="author" content="Joe Jaworski" />
+	<link rel="stylesheet" type="text/css" href="styles.css"/>
+	<title>Candler, NC Weather Report</title>
+
+	<script src="Chart.min.js"></script>
+
+
+</head>
+
+<body>
+<div id="wrap">
+	<div id="header">
+  	<h1>candler weather</h1>
+		<p><strong>candler, north carolina 28715</strong></p>
+  </div>
+
+  <div id="leftside">
+		<h2 class="hide">menu</h2>
+		<ul class="avmenu">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="temp.html">Temperature</a></li>
+			<li><a href="rain.html">Rain</a></li>
+			<li><a href="wind.html">Wind</a></li>
+			<li><a class="current" href="history.html">History</a></li>
+			<li><a href="about.html">About</a></li>
+		</ul>
+	</div>
+
+  <div id="contentwide">
+		<h2>weather history</h2>
+		
+	<div id="chartdiv">&nbsp;
+		<canvas id="maxtemp-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+   
+		<script>
+
+		// Static Values, MAX Temperature **********
+		var MaxTemps = [89.8, 93.0, 89.5, 92.0, 90.7];
+
+		// Calculate min/max Y axis
+		var Tmin = MaxTemps[0];
+		var Tmax = MaxTemps[0];
+		for(i = 1; i < MaxTemps.length; i++)
+		{
+			if (MaxTemps[i] > Tmax)
+				Tmax = MaxTemps[i];
+			if(MaxTemps[i] < Tmin)
+				Tmin = MaxTemps[i];
+		}
+		Tmin = Math.floor(Tmin/10) * 10;
+		Tmax = (Math.floor(Tmax/10) * 10) + 10;
+
+     
+		new Chart(document.getElementById("maxtemp-chart"),
+		{
+			type: 'bar',
+			data: {
+				labels: ["2014", "2015", "2016", "2017", "2018"],
+			datasets: [
+			{
+				label: "Max Temp",
+				backgroundColor: ["#F00000", "#E00000","#D00000","#C00000","#B00000"],
+				data: [MaxTemps[0], MaxTemps[1], MaxTemps[2], MaxTemps[3], MaxTemps[4]]
+			}
+		]
+    },
+    options:
+	{
+		legend: { display: false },
+		title:
+		{
+			display: true,
+			text: 'Maximum Temperature by Year'
+		},
+		responsive: false,
+		maintainAspectRatio: false,
+		scales:
+		{
+            yAxes: [{
+            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 5 },
+            scaleLabel: { display: true, labelString: 'Temperatue (F)' }
+				
+         }]}
+        
+
+    }
+
+});
+
+		</script>
+	</div>
+
+	<p>&nbsp;</p>
+	<div id="chartdiv2">&nbsp;
+			<canvas id="mintemp-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+   
+		<script>
+
+		// Static Values, MIN Temperature **********
+		var MinTemps = [-1.2, 0.4, 2.0, 0.8, 1.7];
+     
+		// Calculate min/max Y axis
+		var Tmin = MinTemps[0];
+		var Tmax = MinTemps[0];
+		for(i = 1; i < MinTemps.length; i++)
+		{
+			if (MinTemps[i] > Tmax)
+				Tmax = MinTemps[i];
+			if(MinTemps[i] < Tmin)
+				Tmin = MinTemps[i];
+		}
+		Tmin = Math.floor(Tmin/10) * 5;
+		Tmax = (Math.floor(Tmax/10) * 5) + 5;
+
+		new Chart(document.getElementById("mintemp-chart"),
+		{
+			type: 'bar',
+			data: {
+				labels: ["2014", "2015", "2016", "2017", "2018"],
+			datasets: [
+			{
+				label: "Min Temp",
+				backgroundColor: ["#0000F0", "#0000E0","#0000D0","#0000C0","#0000B0"],
+				data: [MinTemps[0], MinTemps[1], MinTemps[2], MinTemps[3], MinTemps[4]]
+			}
+		]
+    },
+    options:
+	{
+		legend: { display: false },
+		title:
+		{
+			display: true,
+			text: 'Minimum Temperature by Year'
+		},
+		responsive: false,
+		maintainAspectRatio: false,
+		scales:
+		{
+            yAxes: [{
+            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 1 },
+            scaleLabel: { display: true, labelString: 'Temperatue (F)' }
+				
+         }]}
+        
+
+    }
+
+});
+
+    </script>
+
+	
+	<p>&nbsp;</p>
+	<div id="chartdivQ">&nbsp;
+			<canvas id="rain-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+   
+		<script>
+
+		// Static Values, Rain by Year **********
+		var Rain = [38.0, 52.2, 26.5, 46.9, 64.0];
+
+		// Calculate min/max Y axis
+		var Tmin = Rain[0];
+		var Tmax = Rain[0];
+		for(i = 1; i < Rain.length; i++)
+		{
+			if (Rain[i] > Tmax)
+				Tmax = Rain[i];
+			if(Rain[i] < Tmin)
+				Tmin = Rain[i];
+		}
+		Tmin = Math.floor(Tmin/10) * 10;
+		Tmax = (Math.floor(Tmax/10) * 10) + 10;
+     
+		new Chart(document.getElementById("rain-chart"),
+		{
+			type: 'bar',
+			data: {
+				labels: ["2014", "2015", "2016", "2017", "2018"],
+			datasets: [
+			{
+				label: "Rain",
+				backgroundColor: ["#00F000", "#00E000","#00D000","#00C000","#00B000"],
+				data: [ Rain[0], Rain[1], Rain[2], Rain[3], Rain[4] ]
+			}
+		]
+    },
+    options:
+	{
+		legend: { display: false },
+		title:
+		{
+			display: true,
+			text: 'Rainfall by Year'
+		},
+		responsive: false,
+		maintainAspectRatio: false,
+		scales:
+		{
+            yAxes: [{
+            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 5 },
+            scaleLabel: { display: true, labelString: 'Rain (Inches)' }
+				
+         }]}
+        
+
+    }
+
+});
+
+    </script>
+
+	
+	
+	</div>
+	<p>&nbsp;</p>
+	
+	</div>
+	<div id="footer">
+		<p><span>&copy; 2017-2019 Joe Jaworski<br />
+		all rights reserved&nbsp;&nbsp;&brvbar;&nbsp;&nbsp;<a href="njs.html" onmouseover="this.href='mail' + 'to:' + 'jj' + String.fromCharCode(64) + 'joejaworski' + '.' + 'com'">Email</a></span></p>
+	</div>
+
+	</div></div>
+</body>
+</html>
+
