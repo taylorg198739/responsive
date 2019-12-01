@@ -5,6 +5,7 @@
 	<meta name="description" content="Candler NC Weather Station" />
 	<meta name="keywords" content="candler,asheville,north carolina,weather" />
 	<meta name="author" content="Joe Jaworski" />
+	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" type="text/css" href="styles.css" />
 	<title>Candler, NC Weather Report</title>
 	
@@ -18,194 +19,196 @@
   		<h1>candler weather</h1>
 		<p><strong>candler, north carolina 28715</strong></p>
 	</div>
-
-	<div id="leftside">
-		<h2 class="hide">menu</h2>
-		<ul class="avmenu">
-			<li><a href="index.html">Home</a></li>
-			<li><a href="temp.html">Temperature</a></li>
-			<li><a class="current" href="rain.html">Rain</a></li>
-			<li><a class="current" href="wind.html">Wind</a></li>
-			<li><a href="history.html">History</a></li>
-			<li><a href="about.html">About</a></li>
-		</ul>
+	<div class="main-content">
+		<div id="leftside">
+			<h2 class="hide">menu</h2>
+			<ul class="avmenu">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="temp.html">Temperature</a></li>
+				<li><a href="rain.html">Rain</a></li>
+				<li><a class="current" href="wind.html">Wind</a></li>
+				<li><a href="history.html">History</a></li>
+				<li><a href="about.html">About</a></li>
+			</ul>
+		</div>
+	
+		<div id="contentwide">
+			<h2><img src="img/windy.gif" width="26" height="26" alt="" class = "alignleft" />Wind</h2>
+	
+	
+			<div id="chartdivZ">&nbsp;
+				<canvas id="windMAX10-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+			
+			<script>
+	
+			// Max wind last 10 days **********
+			var Dates = [
+			'11/17',
+			'11/18',
+			'11/19',
+			'11/20',
+			'11/21',
+			'11/22',
+			'11/23',
+			'11/24',
+			'11/25',
+			'11/26' ];
+			var Values = [
+			8,
+			12,
+			9,
+			22,
+			6,
+			21,
+			16,
+			24,
+			8,
+			5 ];
+	
+			// Calculate max Y axis
+			var Tmin = 0;
+			var Tmax = Values[0];
+			for(i = 1; i < Values.length; i++)
+			{
+				if (Values[i] > Tmax)
+					Tmax = Values[i];
+			}
+	//		window.alert(Tmax);
+				Tmax = (Math.floor(Tmax/10) * 10) + 5;
+	//		window.alert(Tmax);
+	
+			new Chart(document.getElementById("windMAX10-chart"),
+			{
+				type: 'bar',
+				data: {
+					labels: [Dates[0], Dates[1], Dates[2], Dates[3], Dates[4], Dates[5], Dates[6], Dates[7], Dates[8], Dates[9] ],
+					datasets: [
+					{
+						label: "MPH",
+	
+						backgroundColor: '#9CF4F3',
+	
+						data: [Values[0], Values[1], Values[2], Values[3], Values[4], Values[5], Values[6], Values[7], Values[8], Values[9] ]
+					}
+				]
+			},
+			options:
+		{
+			legend: { display: false },
+			title:
+			{
+				display: true,
+				text: 'Maximum Winds Speed- Last 10 Days'
+			},
+			responsive: false,
+			maintainAspectRatio: false,
+			scales:
+			{
+							yAxes: [{
+							ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 5 },
+							scaleLabel: { display: true, labelString: 'Wind (mph)' }
+					
+						}]}
+					
+	
+			}
+	
+	});
+	
+				</script></div>
+	
+			<p>&nbsp;</p>
+	
+			<div id="chartdivX">&nbsp;
+					<canvas id="MAX12-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
+			
+				<script>
+	
+				// Last 12 months of Wind **********
+				var Months = [
+				'NOV',
+				'DEC',
+				'JAN',
+				'FEB',
+				'MAR',
+				'APR',
+				'MAY',
+				'JUN',
+				'JUL',
+				'AUG',
+				'SEP',
+				'OCT' ];
+				var Values = [
+				24,
+				21,
+				38,
+				32,
+				29,
+				27,
+				21,
+				20,
+				15,
+				15,
+				14,
+				27 ];
+	
+				// Calculate min/max Y axis
+				var Tmin = 0;
+				var Tmax = Values[0];
+				for(i = 1; i < Values.length; i++)
+				{
+					if (Values[i] > Tmax)
+						Tmax = Values[i];
+				}
+		//		window.alert(Tmax);
+				Tmax = (Math.floor(Tmax/10) * 10) + 10;
+		//		window.alert(Tmax);
+	
+				new Chart(document.getElementById("MAX12-chart"),
+				{
+					type: 'bar',
+					data: {
+						labels: [Months[0], Months[1], Months[2], Months[3], Months[4], Months[5], Months[6], Months[7], Months[8], Months[9], Months[10], Months[11] ],
+						datasets: [
+						{
+							label: "MPH",
+	
+							backgroundColor: '#FB71E6',
+	
+							data: [Values[0], Values[1], Values[2], Values[3], Values[4], Values[5], Values[6], Values[7], Values[8], Values[9], Values[10], Values[11] ]
+						}
+					]
+				},
+				options:
+			{
+				legend: { display: false },
+				title:
+				{
+					display: true,
+					text: 'Maximum Wind- Last 12 Months'
+				},
+				responsive: false,
+				maintainAspectRatio: false,
+				scales:
+				{
+								yAxes: [{
+								ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 5 },
+								scaleLabel: { display: true, labelString: 'Wind (mph)' }
+						
+						}]}
+						
+	
+				}
+	
+		});
+	
+				</script></div>
+	
+	
+			<p>&nbsp;</p>
+		</div>
 	</div>
-
-  <div id="contentwide">
-		<h2><img src="img/windy.gif" width="26" height="26" alt="" class = "alignleft" />Wind</h2>
-
-
-	<div id="chartdivZ">&nbsp;
-			<canvas id="windMAX10-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
-   
-		<script>
-
-		// Max wind last 10 days **********
-		var Dates = [
-		'11/17',
-		'11/18',
-		'11/19',
-		'11/20',
-		'11/21',
-		'11/22',
-		'11/23',
-		'11/24',
-		'11/25',
-		'11/26' ];
-		var Values = [
-		8,
-		12,
-		9,
-		22,
-		6,
-		21,
-		16,
-		24,
-		8,
-		5 ];
-
-		// Calculate max Y axis
-		var Tmin = 0;
-		var Tmax = Values[0];
-		for(i = 1; i < Values.length; i++)
-		{
-			if (Values[i] > Tmax)
-				Tmax = Values[i];
-		}
-//		window.alert(Tmax);
-			Tmax = (Math.floor(Tmax/10) * 10) + 5;
-//		window.alert(Tmax);
-
-		new Chart(document.getElementById("windMAX10-chart"),
-		{
-			type: 'bar',
-			data: {
-				labels: [Dates[0], Dates[1], Dates[2], Dates[3], Dates[4], Dates[5], Dates[6], Dates[7], Dates[8], Dates[9] ],
-				datasets: [
-				{
-					label: "MPH",
-
-					backgroundColor: '#9CF4F3',
-
-					data: [Values[0], Values[1], Values[2], Values[3], Values[4], Values[5], Values[6], Values[7], Values[8], Values[9] ]
-				}
-			]
-    },
-    options:
-	{
-		legend: { display: false },
-		title:
-		{
-			display: true,
-			text: 'Maximum Winds Speed- Last 10 Days'
-		},
-		responsive: false,
-		maintainAspectRatio: false,
-		scales:
-		{
-            yAxes: [{
-            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 5 },
-            scaleLabel: { display: true, labelString: 'Wind (mph)' }
-				
-         }]}
-        
-
-    }
-
-});
-
-    </script></div>
-
-	<p>&nbsp;</p>
-
-	<div id="chartdivX">&nbsp;
-			<canvas id="MAX12-chart" width="575" height="350" style="border:1px solid #000000;"></canvas>
-   
-		<script>
-
-		// Last 12 months of Wind **********
-		var Months = [
-		'NOV',
-		'DEC',
-		'JAN',
-		'FEB',
-		'MAR',
-		'APR',
-		'MAY',
-		'JUN',
-		'JUL',
-		'AUG',
-		'SEP',
-		'OCT' ];
-		var Values = [
-		24,
-		21,
-		38,
-		32,
-		29,
-		27,
-		21,
-		20,
-		15,
-		15,
-		14,
-		27 ];
-
-		// Calculate min/max Y axis
-		var Tmin = 0;
-		var Tmax = Values[0];
-		for(i = 1; i < Values.length; i++)
-		{
-			if (Values[i] > Tmax)
-				Tmax = Values[i];
-		}
-//		window.alert(Tmax);
-		Tmax = (Math.floor(Tmax/10) * 10) + 10;
-//		window.alert(Tmax);
-
-		new Chart(document.getElementById("MAX12-chart"),
-		{
-			type: 'bar',
-			data: {
-				labels: [Months[0], Months[1], Months[2], Months[3], Months[4], Months[5], Months[6], Months[7], Months[8], Months[9], Months[10], Months[11] ],
-				datasets: [
-				{
-					label: "MPH",
-
-					backgroundColor: '#FB71E6',
-
-					data: [Values[0], Values[1], Values[2], Values[3], Values[4], Values[5], Values[6], Values[7], Values[8], Values[9], Values[10], Values[11] ]
-				}
-			]
-    },
-    options:
-	{
-		legend: { display: false },
-		title:
-		{
-			display: true,
-			text: 'Maximum Wind- Last 12 Months'
-		},
-		responsive: false,
-		maintainAspectRatio: false,
-		scales:
-		{
-            yAxes: [{
-            ticks: { beginAtZero:false, max: Tmax, min: Tmin,  stepSize: 5 },
-            scaleLabel: { display: true, labelString: 'Wind (mph)' }
-				
-         }]}
-        
-
-    }
-
-});
-
-    </script></div>
-
-
-	<p>&nbsp;</p>
-
+	
 
 
 	<div id="footer">
