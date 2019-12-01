@@ -28,8 +28,8 @@ body {background:url(img/bg.gif) repeat-y top center #eaeaea; color:#3a3a3a; fon
 
 /* Main content */
 #content {line-height:1.5em; padding:0; text-align:left;}
-#contentwide {line-height:1.5em; margin:10px 0 10px 160px; padding:0; text-align:left;}
-#content h2,#contentwide h2 {font-size:1.8em; font-weight:400; letter-spacing:-1px; margin:8px 0 10px; padding:0;}
+#contentwide {line-height:1.5em; margin:10px; padding:0; text-align:left; width: 100%;}
+#content h2,#contentwide h2 {font-size:1.8em; font-weight:400; letter-spacing:-1px; margin:0; padding:0; line-height: 1.4em;}
 #content h3,#contentwide h3 {font-size:1.5em; font-weight:400; margin:6px 0; padding:0;}
 #content img,#contentwide img {background: #f4f4f4; border:0px; color:#303030; display:inline; padding:1px; margin:0 10px 5px 0;}
 #content ul,#content ol,#contentwide ul,#contentwide ol {margin:0 0 16px 20px; padding:0;}
@@ -63,7 +63,7 @@ img.aligncenter {	margin: 0px auto; }
 
 
 /* Tables and forms */
-table {border:1px solid #d8d8d8; border-collapse:collapse; line-height:1.3em; width:95%; margin:0 0 16px; padding:0;}
+table {border:1px solid #d8d8d8; border-collapse:collapse; line-height:1.3em; width:97%; margin:0 0 16px; padding:0;}
 caption {font-size:1.5em; font-weight:400; margin:0; padding:6px 0 8px; text-align:left;}
 th {background:url(img/menubg2.gif) repeat-x bottom left #eaeaea; color:#505050; padding:7px; text-align:left;}
 td {background:url(img/menubg.gif) repeat-x bottom left #f4f4f4; color:#303030; font-size:0.9em; padding:7px; text-align:left;}
@@ -112,6 +112,7 @@ textarea {width:400px;}
 	}
 	.main-content {
 		flex-direction: column;
+		padding: 0 10px;
 	}
 	body {font-size: 16px;}
 
@@ -128,7 +129,13 @@ textarea {width:400px;}
 
 	.weather-img img {width: 80%;}
 
+	#contentwide h2 {line-height: 1em;}
+
 	#extras {width: 100%; display: flex; justify-content: space-around; flex-direction: row-reverse;}
+
+	canvas {
+		width: 98% !important;
+	}
 }
 
 @media only screen and (max-width: 500px) {
